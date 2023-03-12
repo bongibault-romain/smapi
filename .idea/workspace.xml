@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="build: set language level to 17">
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/SMAPI.java" afterDir="false" />
-    </list>
+    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="feat: add main plugin class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,11 +17,17 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProjectId" id="2MvpCEyV7WGVPU0ueCMXkMuyfbO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -38,6 +42,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -46,7 +51,8 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "actions.on.save"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -57,7 +63,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1678657784020</updated>
-      <workItem from="1678657785536" duration="321000" />
+      <workItem from="1678657785536" duration="433000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1678657808168</created>
@@ -94,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678658067254</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: add main plugin class">
+      <created>1678658140487</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678658140487</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +129,11 @@
     <MESSAGE value="build: set language level to 18" />
     <MESSAGE value="build: add paper to maven dependencies" />
     <MESSAGE value="build: set language level to 17" />
-    <option name="LAST_COMMIT_MESSAGE" value="build: set language level to 17" />
+    <MESSAGE value="feat: add main plugin class" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add main plugin class" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
