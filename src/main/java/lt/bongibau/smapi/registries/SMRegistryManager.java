@@ -2,8 +2,6 @@ package lt.bongibau.smapi.registries;
 
 import lt.bongibau.smapi.registries.exceptions.SMRegistryLoadingException;
 import lt.bongibau.smapi.registries.exceptions.SMRegistryUnLoadingException;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -11,33 +9,11 @@ import java.util.Deque;
 import java.util.List;
 
 @RegistryInfo(dependencies = SMRegistryManager.class)
-public final class SMRegistryManager extends SMRegistry {
+public final class SMRegistryManager extends SMDataRegistry<SMRegistry> {
 
     private static final SMRegistryManager instance = new SMRegistryManager();
 
-    private final List<SMRegistry> registries = new ArrayList<>();
-
     private final Deque<SMRegistry> loadingOrder = new ArrayDeque<>();
-
-    public void register(@NotNull SMRegistry registry) {
-        if (!this.registries.contains(registry))
-            this.registries.add(registry);
-    }
-
-    public void unregister(@NotNull SMRegistry registry) {
-        this.registries.remove(registry);
-    }
-
-    @Nullable
-    public <T extends SMRegistry> T get(@NotNull Class<T> registryClass) {
-        SMRegistry registry = this.registries.stream().filter(registryClass::isInstance).findFirst().orElse(null);
-
-        if (registry != null) {
-            return registryClass.cast(registry);
-        }
-
-        return null;
-    }
 
     public static SMRegistryManager getInstance() {
         return instance;
@@ -45,7 +21,7 @@ public final class SMRegistryManager extends SMRegistry {
 
     @Override
     protected void onEnable() throws SMRegistryLoadingException {
-        for (SMRegistry registry : this.registries) {
+        for (SMRegistry registry : this.getData()) {
             this.enable(registry, new ArrayList<>());
         }
     }

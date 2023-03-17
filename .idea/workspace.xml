@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="feat: add plugin.yml">
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/RegistryInfo.java" afterDir="false" />
+    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="fix: disabling registries as the reverse of the loading order">
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMDataRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" afterDir="false" />
     </list>
@@ -17,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="AnnotationType" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -63,8 +63,29 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lt.bongibau.smapi" />
       <recent name="lt.bongibau.smapi.registries.exceptions" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="lt.bongibau.smapi.SMAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lt.bongibau.smapi.SMAPI" />
+      <module name="smapi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lt.bongibau.smapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.lt.bongibau.smapi.SMAPI" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -77,7 +98,7 @@
       <workItem from="1678657785536" duration="3917000" />
       <workItem from="1678880162784" duration="521000" />
       <workItem from="1678880713242" duration="139000" />
-      <workItem from="1679052460022" duration="5253000" />
+      <workItem from="1679052460022" duration="8163000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1678657808168</created>
@@ -184,7 +205,35 @@
       <option name="project" value="LOCAL" />
       <updated>1679056307912</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="feat: add registry dependencies">
+      <created>1679058648670</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1679058648670</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix: make variables private">
+      <created>1679060313136</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1679060313136</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: disable throwing error condition">
+      <created>1679060422562</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1679060422562</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix: disabling registries as the reverse of the loading order">
+      <created>1679061055027</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1679061055027</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,7 +269,11 @@
     <MESSAGE value="fix: add setter to prevent lint issues" />
     <MESSAGE value="fix: make SMRegistryManager final" />
     <MESSAGE value="feat: add plugin.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add plugin.yml" />
+    <MESSAGE value="feat: add registry dependencies" />
+    <MESSAGE value="fix: make variables private" />
+    <MESSAGE value="fix: disable throwing error condition" />
+    <MESSAGE value="fix: disabling registries as the reverse of the loading order" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: disabling registries as the reverse of the loading order" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
