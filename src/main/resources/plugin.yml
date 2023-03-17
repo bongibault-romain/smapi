@@ -1,0 +1,7 @@
+name: SMAPI
+version: 1.0.0
+authors:
+  - Bongibault Romain
+main: lt.bongibau.smapi.SMAPI
+api-version: 1.13
+load: POSTWORLD
