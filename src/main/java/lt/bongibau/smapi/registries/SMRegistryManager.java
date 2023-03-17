@@ -6,7 +6,7 @@ import lt.bongibau.smapi.registries.exceptions.SMRegistryUnLoadingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SMRegistryManager extends SMRegistry {
+public final class SMRegistryManager extends SMRegistry {
 
     private static final SMRegistryManager instance = new SMRegistryManager();
 

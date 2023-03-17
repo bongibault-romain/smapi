@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="feat: implements main SMAPI registry">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistry.java" afterDir="false" />
+    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="fix: add setter to prevent lint issues">
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,7 @@
       <workItem from="1678657785536" duration="3917000" />
       <workItem from="1678880162784" duration="521000" />
       <workItem from="1678880713242" duration="139000" />
-      <workItem from="1679052460022" duration="3160000" />
+      <workItem from="1679052460022" duration="3284000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1678657808168</created>
@@ -162,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679055962988</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix: add setter to prevent lint issues">
+      <created>1679056076814</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1679056076814</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,7 +201,8 @@
     <MESSAGE value="feat: create SMRegistry and the RegistryManager of SMAPI" />
     <MESSAGE value="build: fix code rearrangement" />
     <MESSAGE value="feat: implements main SMAPI registry" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: implements main SMAPI registry" />
+    <MESSAGE value="fix: add setter to prevent lint issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: add setter to prevent lint issues" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
