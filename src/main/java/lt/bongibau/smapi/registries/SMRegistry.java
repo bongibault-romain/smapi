@@ -21,11 +21,11 @@ public abstract class SMRegistry {
         this.onDisable();
     }
 
-    protected abstract void onEnable();
-
-    protected abstract void onDisable();
-
     public final boolean isEnabled() {
         return this.enabled;
     }
+
+    protected abstract void onEnable();
+
+    protected abstract void onDisable();
 }
