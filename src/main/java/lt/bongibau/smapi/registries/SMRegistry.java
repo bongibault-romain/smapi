@@ -15,7 +15,7 @@ public abstract class SMRegistry {
     }
 
     public final void disable() throws SMRegistryUnLoadingException {
-        if (this.isEnabled()) throw new SMRegistryUnLoadingException("This registry is already disabled.");
+        if (!this.isEnabled()) throw new SMRegistryUnLoadingException("This registry is already disabled.");
 
         this.setEnabled(false);
         this.onDisable();
