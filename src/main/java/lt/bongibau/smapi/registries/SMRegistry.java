@@ -25,7 +25,7 @@ public abstract class SMRegistry {
         return this.enabled;
     }
 
-    protected abstract void onEnable();
+    protected abstract void onEnable() throws SMRegistryLoadingException;
 
-    protected abstract void onDisable();
+    protected abstract void onDisable() throws SMRegistryUnLoadingException;
 }
