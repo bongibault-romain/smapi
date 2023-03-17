@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-public final class SMRegistryManager extends SMDataRegistry<SMRegistry> {
+public final class SMRegistryManager extends SMInstanceRegistry<SMRegistry> {
 
     private static final SMRegistryManager instance = new SMRegistryManager();
 

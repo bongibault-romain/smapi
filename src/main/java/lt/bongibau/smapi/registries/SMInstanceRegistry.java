@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class SMDataRegistry<T> extends SMRegistry {
+public abstract class SMInstanceRegistry<T> extends SMRegistry {
 
     private final List<T> data = new ArrayList<>();
 
