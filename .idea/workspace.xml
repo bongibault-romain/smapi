@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="build: add project formatting convention">
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/Commands.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/Registry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/RegistryInfo.java" afterDir="false" />
+    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="feat: create SMPlugin, a base code for all dependents plugins">
       <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/validators/SMValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/exceptions/SMRegistryLoadingException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/exceptions/SMRegistryUnLoadingException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/SMPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/SMPlugin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +63,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lt.bongibau.smapi.registries.exceptions" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -74,7 +79,7 @@
       <workItem from="1678657785536" duration="3917000" />
       <workItem from="1678880162784" duration="521000" />
       <workItem from="1678880713242" duration="139000" />
-      <workItem from="1679052460022" duration="358000" />
+      <workItem from="1679052460022" duration="1808000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1678657808168</created>
@@ -125,7 +130,21 @@
       <option name="project" value="LOCAL" />
       <updated>1678658240470</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="build: intelliJ internal files">
+      <created>1679053276207</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679053276207</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: create SMPlugin, a base code for all dependents plugins">
+      <created>1679053376228</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679053376228</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,7 +172,9 @@
     <MESSAGE value="build: set language level to 17" />
     <MESSAGE value="feat: add main plugin class" />
     <MESSAGE value="build: add project formatting convention" />
-    <option name="LAST_COMMIT_MESSAGE" value="build: add project formatting convention" />
+    <MESSAGE value="build: intelliJ internal files" />
+    <MESSAGE value="feat: create SMPlugin, a base code for all dependents plugins" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: create SMPlugin, a base code for all dependents plugins" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
