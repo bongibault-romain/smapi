@@ -5,7 +5,9 @@ import lt.bongibau.smapi.registries.exceptions.SMRegistryUnLoadingException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 @RegistryInfo(dependencies = SMRegistryManager.class)
@@ -15,19 +17,7 @@ public final class SMRegistryManager extends SMRegistry {
 
     private final List<SMRegistry> registries = new ArrayList<>();
 
-    @Override
-    public void onEnable() throws SMRegistryLoadingException {
-        for (SMRegistry registry : this.registries) {
-            this.enable(registry, new ArrayList<>());
-        }
-    }
-
-    @Override
-    public void onDisable() throws SMRegistryUnLoadingException {
-        for (SMRegistry registry : this.registries) {
-            if (registry.isEnabled()) registry.disable();
-        }
-    }
+    private final Deque<SMRegistry> loadingOrder = new ArrayDeque<>();
 
     public void register(@NotNull SMRegistry registry) {
         if (!this.registries.contains(registry))
@@ -53,6 +43,26 @@ public final class SMRegistryManager extends SMRegistry {
         return instance;
     }
 
+    @Override
+    protected void onEnable() throws SMRegistryLoadingException {
+        for (SMRegistry registry : this.registries) {
+            this.enable(registry, new ArrayList<>());
+        }
+    }
+
+    @Override
+    protected void onDisable() throws SMRegistryUnLoadingException {
+        SMRegistry registry = this.loadingOrder.pollLast();
+
+        while (registry != null) {
+            registry.disable();
+
+            registry = this.loadingOrder.pollLast();
+        }
+
+        this.loadingOrder.clear();
+    }
+
     private void enable(SMRegistry registry, List<SMRegistry> loaded) throws SMRegistryLoadingException {
         if (registry.isEnabled()) return;
 
@@ -73,9 +83,9 @@ public final class SMRegistryManager extends SMRegistry {
 
                 this.enable(dependency, loaded);
             }
-
-            registry.enable();
         }
-    }
 
+        registry.enable();
+        this.loadingOrder.add(registry);
+    }
 }
