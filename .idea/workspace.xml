@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="fix: make SMRegistryManager final">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="feat: add plugin.yml">
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/RegistryInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="AnnotationType" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -76,7 +77,7 @@
       <workItem from="1678657785536" duration="3917000" />
       <workItem from="1678880162784" duration="521000" />
       <workItem from="1678880713242" duration="139000" />
-      <workItem from="1679052460022" duration="3402000" />
+      <workItem from="1679052460022" duration="5253000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1678657808168</created>
@@ -176,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679056193406</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="feat: add plugin.yml">
+      <created>1679056307912</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1679056307912</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +219,8 @@
     <MESSAGE value="feat: implements main SMAPI registry" />
     <MESSAGE value="fix: add setter to prevent lint issues" />
     <MESSAGE value="fix: make SMRegistryManager final" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: make SMRegistryManager final" />
+    <MESSAGE value="feat: add plugin.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add plugin.yml" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
