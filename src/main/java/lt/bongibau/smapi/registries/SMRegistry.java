@@ -10,19 +10,23 @@ public abstract class SMRegistry {
     public final void enable() throws SMRegistryLoadingException {
         if (this.isEnabled()) throw new SMRegistryLoadingException("This registry is already enabled.");
 
-        this.enabled = true;
+        this.setEnabled(true);
         this.onEnable();
     }
 
     public final void disable() throws SMRegistryUnLoadingException {
         if (this.isEnabled()) throw new SMRegistryUnLoadingException("This registry is already disabled.");
 
-        this.enabled = false;
+        this.setEnabled(false);
         this.onDisable();
     }
 
     public final boolean isEnabled() {
         return this.enabled;
+    }
+
+    private void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     protected abstract void onEnable() throws SMRegistryLoadingException;
