@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-public final class SMRegistryManager extends SMInstanceRegistry<SMRegistry> {
+public final class SMRegistryManager extends InstanceSMRegistry<SMRegistry> {
 
     private static final SMRegistryManager instance = new SMRegistryManager();
 
@@ -19,48 +19,48 @@ public final class SMRegistryManager extends SMInstanceRegistry<SMRegistry> {
     }
 
     @Override
-    protected void onEnable() throws SMRegistryLoadingException {
-        for (SMRegistry registry : this.getData()) {
-            this.enable(registry, new ArrayList<>());
+    protected void onLoad() throws SMRegistryLoadingException {
+        for (SMRegistry SMRegistry : this.getData()) {
+            this.load(SMRegistry, new ArrayList<>());
         }
     }
 
     @Override
-    protected void onDisable() throws SMRegistryUnLoadingException {
-        SMRegistry registry = this.loadingOrder.pollLast();
+    protected void onUnload() throws SMRegistryUnLoadingException {
+        SMRegistry SMRegistry = this.loadingOrder.pollLast();
 
-        while (registry != null) {
-            registry.disable();
+        while (SMRegistry != null) {
+            SMRegistry.unload();
 
-            registry = this.loadingOrder.pollLast();
+            SMRegistry = this.loadingOrder.pollLast();
         }
 
         this.loadingOrder.clear();
     }
 
-    private void enable(SMRegistry registry, List<SMRegistry> loaded) throws SMRegistryLoadingException {
-        if (registry.isEnabled()) return;
+    private void load(SMRegistry SMRegistry, List<SMRegistry> loaded) throws SMRegistryLoadingException {
+        if (SMRegistry.isLoaded()) return;
 
-        if (loaded.contains(registry))
-            throw new SMRegistryLoadingException("Circular dependency detected: " + registry + ".");
+        if (loaded.contains(SMRegistry))
+            throw new SMRegistryLoadingException("Circular dependency detected: " + SMRegistry + ".");
 
-        loaded.add(registry);
+        loaded.add(SMRegistry);
 
-        if (registry.getClass().isAnnotationPresent(RegistryInfo.class)) {
-            RegistryInfo registryInfo = registry.getClass().getAnnotation(RegistryInfo.class);
+        if (SMRegistry.getClass().isAnnotationPresent(SMRegistryInfo.class)) {
+            SMRegistryInfo SMRegistryInfo = SMRegistry.getClass().getAnnotation(SMRegistryInfo.class);
 
-            for (Class<? extends SMRegistry> dependencyClass : registryInfo.dependencies()) {
+            for (Class<? extends SMRegistry> dependencyClass : SMRegistryInfo.dependencies()) {
                 SMRegistry dependency = this.get(dependencyClass);
 
                 if (dependency == null) {
-                    throw new SMRegistryLoadingException("Dependency does not exists: " + dependencyClass + " for " + registry + ".");
+                    throw new SMRegistryLoadingException("Dependency does not exists: " + dependencyClass + " for " + SMRegistry + ".");
                 }
 
-                this.enable(dependency, loaded);
+                this.load(dependency, loaded);
             }
         }
 
-        registry.enable();
-        this.loadingOrder.add(registry);
+        SMRegistry.load();
+        this.loadingOrder.add(SMRegistry);
     }
 }

@@ -7,13 +7,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class SMInstanceRegistry<T> extends SMRegistry {
+public abstract class InstanceSMRegistry<T> extends SMRegistry {
 
     private final List<T> data = new ArrayList<>();
 
     public void register(@NotNull T registry) {
         if (!this.data.contains(registry))
             this.data.add(registry);
+    }
+
+    public void register(@NotNull List<T> registries) {
+        registries.forEach(this::register);
     }
 
     public void unregister(@NotNull T registry) {

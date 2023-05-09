@@ -5,8 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="fix: disabling registries as the reverse of the loading order">
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMDataRegistry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/AdapterRegistry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/BooleanAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/DoubleAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/FloatAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/IntegerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/PlayerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/SMAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterDeserializingException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterSerializingException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/SMRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/exception/RuleValidationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchema.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaFieldBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/SMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/SMAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/RegistryInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMInstanceRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/InstanceSMRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,6 +38,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -49,6 +70,8 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Java Projects/smapi/src/main/java/lt/bongibau/smapi/api/modifier",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,13 +81,20 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java Projects\smapi\src\main\java\lt\bongibau\smapi\api\modifier" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="lt.bongibau.smapi" />
-      <recent name="lt.bongibau.smapi.registries.exceptions" />
+      <recent name="lt.bongibau.smapi.validator" />
+      <recent name="lt.bongibau.smapi.validator.rule.exception" />
+      <recent name="lt.bongibau.smapi.validator.rule" />
+      <recent name="lt.bongibau.smapi.api.validator" />
+      <recent name="lt.bongibau.smapi.adapter.string" />
     </key>
   </component>
   <component name="RunManager">
@@ -99,6 +129,7 @@
       <workItem from="1678880162784" duration="521000" />
       <workItem from="1678880713242" duration="139000" />
       <workItem from="1679052460022" duration="8163000" />
+      <workItem from="1683625284030" duration="11565000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1678657808168</created>

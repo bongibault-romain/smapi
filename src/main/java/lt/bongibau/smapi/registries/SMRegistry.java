@@ -5,31 +5,31 @@ import lt.bongibau.smapi.registries.exceptions.SMRegistryUnLoadingException;
 
 public abstract class SMRegistry {
 
-    private boolean enabled = false;
+    private boolean loaded = false;
 
-    public final void enable() throws SMRegistryLoadingException {
-        if (this.isEnabled()) throw new SMRegistryLoadingException("This registry is already enabled.");
+    public final void load() throws SMRegistryLoadingException {
+        if (this.isLoaded()) throw new SMRegistryLoadingException("This registry is already enabled.");
 
-        this.setEnabled(true);
-        this.onEnable();
+        this.onLoad();
+        this.setLoaded(true);
     }
 
-    public final void disable() throws SMRegistryUnLoadingException {
-        if (!this.isEnabled()) throw new SMRegistryUnLoadingException("This registry is already disabled.");
+    public final void unload() throws SMRegistryUnLoadingException {
+        if (!this.isLoaded()) throw new SMRegistryUnLoadingException("This registry is already disabled.");
 
-        this.setEnabled(false);
-        this.onDisable();
+        this.onUnload();
+        this.setLoaded(false);
     }
 
-    public final boolean isEnabled() {
-        return this.enabled;
+    public final boolean isLoaded() {
+        return this.loaded;
     }
 
-    private void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
     }
 
-    protected abstract void onEnable() throws SMRegistryLoadingException;
+    protected abstract void onLoad() throws SMRegistryLoadingException;
 
-    protected abstract void onDisable() throws SMRegistryUnLoadingException;
+    protected abstract void onUnload() throws SMRegistryUnLoadingException;
 }
