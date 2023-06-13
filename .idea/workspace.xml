@@ -4,30 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="fix: disabling registries as the reverse of the loading order">
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/AdapterRegistry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/BooleanAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/DoubleAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/FloatAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/IntegerAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/PlayerAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/SMAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterDeserializingException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterSerializingException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/SMRule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/exception/RuleValidationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchema.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaFieldBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a18bd19b-ca44-4f2a-9aba-dd718395636c" name="Changes" comment="feat: many changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterDeserializationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterSerializationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/exception/IdentifiedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/exception/InitiatedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/rule/RuleValidationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/rule/SMRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SchemaValidationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/field/SMSchemaField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/field/SchemaFieldException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/validator/rule/EqualsRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/validator/rule/RequiredRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/validator/rule/SupplierRule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/SMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/SMAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/RegistryInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMInstanceRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/InstanceSMRegistry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/registries/SMRegistryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/BooleanAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/BooleanAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/DoubleAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/DoubleAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/FloatAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/FloatAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/IntegerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/IntegerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/PlayerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/adapter/string/PlayerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/SMAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/SMAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterDeserializingException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/adapter/exception/AdapterSerializingException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/SMRule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/exception/RuleValidationException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaField.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/SMSchemaFieldBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lt/bongibau/smapi/api/validator/schema/field/SMSchemaFieldBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,28 +70,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Java Projects/smapi/src/main/java/lt/bongibau/smapi/api/modifier",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/School Projects/tipe&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Java Projects\smapi\src\main\java\lt\bongibau\smapi\api\modifier" />
@@ -129,7 +137,10 @@
       <workItem from="1678880162784" duration="521000" />
       <workItem from="1678880713242" duration="139000" />
       <workItem from="1679052460022" duration="8163000" />
-      <workItem from="1683625284030" duration="11565000" />
+      <workItem from="1683625284030" duration="12526000" />
+      <workItem from="1683641173645" duration="5451000" />
+      <workItem from="1684130362004" duration="98000" />
+      <workItem from="1686599703226" duration="5114000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1678657808168</created>
@@ -264,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679061055027</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="feat: many changes">
+      <created>1683640924237</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1683640924237</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +322,8 @@
     <MESSAGE value="fix: make variables private" />
     <MESSAGE value="fix: disable throwing error condition" />
     <MESSAGE value="fix: disabling registries as the reverse of the loading order" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: disabling registries as the reverse of the loading order" />
+    <MESSAGE value="feat: many changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: many changes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

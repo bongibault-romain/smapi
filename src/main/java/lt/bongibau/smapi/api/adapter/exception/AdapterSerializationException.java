@@ -1,0 +1,11 @@
+package lt.bongibau.smapi.api.adapter.exception;
+
+import org.jetbrains.annotations.NotNull;
+
+public class AdapterSerializationException extends AdapterException {
+    @Override
+    @NotNull
+    public String identifier() {
+        return "serialisation";
+    }
+}

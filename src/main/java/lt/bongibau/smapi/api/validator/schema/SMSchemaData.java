@@ -1,16 +1,27 @@
 package lt.bongibau.smapi.api.validator.schema;
 
-import java.util.Map;
+import lt.bongibau.smapi.api.exception.IdentifiedException;
+import org.jetbrains.annotations.Nullable;
 
-public class SMSchemaData<T> {
+public class SMSchemaData<T> implements IdentifiedException {
 
-    private final Map<String, T> data;
+    private final String identifier;
 
-    public SMSchemaData(Map<String, T> data) {
-        this.data = data;
+    @Nullable
+    private final T value;
+
+    public SMSchemaData(String identifier, @Nullable T value) {
+        this.identifier = identifier;
+        this.value = value;
     }
 
-    public T get(String identifier) {
-        return this.data.get(identifier);
+    @Nullable
+    public T value() {
+        return this.value;
+    }
+
+    @Override
+    public String identifier() {
+        return this.identifier;
     }
 }
