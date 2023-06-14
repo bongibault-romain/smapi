@@ -6,13 +6,17 @@ import lt.bongibau.smapi.api.exception.IdentifiedException;
 import lt.bongibau.smapi.api.validator.rule.RuleValidationException;
 import lt.bongibau.smapi.api.validator.rule.SMRule;
 import lt.bongibau.smapi.api.validator.schema.SMSchemaData;
+import lt.bongibau.smapi.api.validator.schema.SchemaValidationException;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public record SMSchemaField<T, K>(@NotNull String identifier, SMAdapter<T, K> adapter,
-                                  List<SMRule<K>> rules) implements IdentifiedException {
+public class SMSchemaField<T, K> implements IdentifiedException {
+    private final @NotNull String identifier;
+    private final SMAdapter<T, K> adapter;
+    private final List<SMRule<K>> rules;
+
     public SMSchemaField(@NotNull String identifier, SMAdapter<T, K> adapter,
                          List<SMRule<K>> rules) {
         this.identifier = identifier.toLowerCase();
@@ -32,11 +36,12 @@ public record SMSchemaField<T, K>(@NotNull String identifier, SMAdapter<T, K> ad
         }
     }
 
-    public List<SchemaFieldException> validate(@NotNull SMSchemaData<T> data) {
+    public K validate(@NotNull SMSchemaData<T> data) throws SchemaValidationException {
         List<SchemaFieldException> errors = new ArrayList<>(List.of());
 
+        K value;
         try {
-            K value = this.adapter.serialize(data.value());
+            value = this.adapter.serialize(data.value());
 
             for (SMRule<K> rule : this.rules) {
                 try {
@@ -46,9 +51,26 @@ public record SMSchemaField<T, K>(@NotNull String identifier, SMAdapter<T, K> ad
                 }
             }
         } catch (AdapterSerializationException e) {
-            return List.of(new SchemaFieldException(this, e.identifier()));
+            throw new SchemaValidationException(List.of(new SchemaFieldException(this, e.identifier())));
         }
 
-        return errors;
+        if (errors.size() > 0) {
+            throw new SchemaValidationException(errors);
+        }
+
+        return value;
+    }
+
+    @Override
+    public @NotNull String identifier() {
+        return identifier;
+    }
+
+    public SMAdapter<T, K> adapter() {
+        return adapter;
+    }
+
+    public List<SMRule<K>> rules() {
+        return rules;
     }
 }

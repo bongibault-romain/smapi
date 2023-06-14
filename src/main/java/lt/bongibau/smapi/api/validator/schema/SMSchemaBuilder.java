@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SMSchemaBuilder<T> {
 
-    private final List<SMSchemaField<T, ?>> fields = new ArrayList<>();
+    protected final List<SMSchemaField<T, ?>> fields = new ArrayList<>();
 
     public <F> SMSchemaFieldBuilder<T, F> addField(SMAdapter<T, F> adapter) {
         return new SMSchemaFieldBuilder<>(this, adapter);

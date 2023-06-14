@@ -11,6 +11,7 @@ import lt.bongibau.smapi.api.validator.schema.SchemaValidationException;
 import lt.bongibau.smapi.api.validator.schema.field.SchemaFieldException;
 import lt.bongibau.smapi.registries.exceptions.SMRegistryLoadingException;
 import lt.bongibau.smapi.validator.rule.EqualsRule;
+import lt.bongibau.smapi.validator.rule.MaximumRule;
 import lt.bongibau.smapi.validator.rule.RequiredRule;
 import lt.bongibau.smapi.validator.rule.SupplierRule;
 
@@ -24,10 +25,11 @@ public class SMAPI {
                 .addField(AdapterRegistry.getInstance().get(IntegerAdapter.class))
                 .setIdentifier("test")
                 .addRule(new RequiredRule<>())
-                .addRule(new EqualsRule<>(12))
+                .addRule(new EqualsRule<>(19))
                 .addRule(new SupplierRule<>("fn1", integer -> {
                     return false;
                 }))
+                .addRule(new MaximumRule<>(19, false))
                 .build()
                 .addField("test2", AdapterRegistry.getInstance().get(BooleanAdapter.class))
                 .addRule(new RequiredRule<>())
@@ -36,7 +38,7 @@ public class SMAPI {
 
         try {
             schema.validate(List.of(
-                    new SMSchemaData<>("test", "10")
+                    new SMSchemaData<>("test", "19")
             ));
         } catch (SchemaValidationException e) {
             for (SchemaFieldException error : e.getErrors()) {

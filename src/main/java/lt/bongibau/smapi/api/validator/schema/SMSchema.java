@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public record SMSchema<T>(@NotNull List<SMSchemaField<T, ?>> fields) {
+public class SMSchema<T> {
+    private final @NotNull List<SMSchemaField<T, ?>> fields;
 
     public SMSchema(@NotNull List<SMSchemaField<T, ?>> fields) {
         this.fields = fields;
@@ -26,8 +27,9 @@ public record SMSchema<T>(@NotNull List<SMSchemaField<T, ?>> fields) {
         }
     }
 
-    public void validate(List<SMSchemaData<T>> data) throws SchemaValidationException {
+    public SMSchemaDataProvider validate(List<SMSchemaData<T>> data) throws SchemaValidationException {
         List<SchemaFieldException> errors = new ArrayList<>();
+        List<SMSchemaData<?>> providedData = new ArrayList<>();
         int errorAmount = 0;
 
         for (SMSchemaField<T, ?> field : this.fields()) {
@@ -36,15 +38,22 @@ public record SMSchema<T>(@NotNull List<SMSchemaField<T, ?>> fields) {
                     .findFirst()
                     .orElse(new SMSchemaData<>(field.identifier(), null));
 
-            List<SchemaFieldException> fieldErrors = field.validate(dataEntry);
-
-            errors.addAll(fieldErrors);
-            errorAmount += fieldErrors.size();
+            try {
+                providedData.add(new SMSchemaData<>(field.identifier(), field.validate(dataEntry)));
+            } catch (SchemaValidationException e) {
+                errors.addAll(e.getErrors());
+                errorAmount += e.getErrors().size();
+            }
         }
 
         if (errorAmount != 0) {
             throw new SchemaValidationException(errors);
         }
+
+        return new SMSchemaDataProvider(providedData);
     }
 
+    public @NotNull List<SMSchemaField<T, ?>> fields() {
+        return fields;
+    }
 }
