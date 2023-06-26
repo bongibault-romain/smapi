@@ -3,6 +3,7 @@ package lt.bongibau.smapi.api.commands.validator.rule;
 import lt.bongibau.smapi.api.commands.CommandContext;
 import lt.bongibau.smapi.api.validator.rule.RuleValidationException;
 import lt.bongibau.smapi.api.validator.rule.SMRule;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -39,30 +40,32 @@ public class PlayerHoldItemRule implements SMRule<CommandContext> {
 
         ItemStack itemInHand = player.getItemInHand();
 
-        if (itemInHand == null) {
+        if (itemInHand == null || itemInHand.getType().equals(Material.AIR)) {
             if (itemStack == null) {
-                if (negation) return;
+                if (negation) throw new RuleValidationException(this);
 
+                return;
+            }
+
+            if (negation) {
+                return;
+            }
+
+            throw new RuleValidationException(this);
+        }
+
+        if (itemStack == null || itemInHand.getType().equals(Material.AIR)) {
+            if (negation) {
                 throw new RuleValidationException(this);
             }
 
-            if (negation) {
-                return;
-            }
-
-            throw new RuleValidationException(this);
+            return;
         }
 
-        if (itemStack == null) {
+        if (itemInHand.isSimilar(itemStack)) {
             if (negation) {
-                return;
+                throw new RuleValidationException(this);
             }
-
-            throw new RuleValidationException(this);
-        }
-
-        if (itemInHand.isSimilar(itemStack) == negation) {
-            throw new RuleValidationException(this);
         }
     }
 
