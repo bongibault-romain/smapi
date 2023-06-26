@@ -194,6 +194,10 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
         return "";
     }
 
+    public void addRule(SMRule<CommandContext> rule) {
+        this.schemaBuilder.addRule(rule);
+    }
+
     @NotNull
     public final List<SMCommand> getSubCommands() {
         return Collections.unmodifiableList(this.subCommands);
