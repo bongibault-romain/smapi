@@ -42,9 +42,9 @@ public class PlayerHoldItemRule implements SMRule<CommandContext> {
 
         if (itemInHand == null || itemInHand.getType().equals(Material.AIR)) {
             if (itemStack == null) {
-                if (negation) throw new RuleValidationException(this);
+                if (negation) return;
 
-                return;
+                throw new RuleValidationException(this);
             }
 
             if (negation) {
