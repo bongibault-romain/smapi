@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SMRegistryInfo {
-    Class<? extends SMRegistry>[] dependencies();
+public @interface SMManagerInfo {
+    Class<? extends SMManager>[] dependencies();
 }

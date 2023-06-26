@@ -1,6 +1,7 @@
 package lt.bongibau.smapi.api.validator.schema;
 
 import lt.bongibau.smapi.api.exception.IdentifiedException;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class SMSchemaData<T> implements IdentifiedException {
@@ -21,7 +22,7 @@ public class SMSchemaData<T> implements IdentifiedException {
     }
 
     @Override
-    public String identifier() {
+    public @NotNull String identifier() {
         return this.identifier;
     }
 }

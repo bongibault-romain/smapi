@@ -1,6 +1,6 @@
 package lt.bongibau.smapi;
 
-import lt.bongibau.smapi.adapter.AdapterRegistry;
+import lt.bongibau.smapi.adapter.AdapterManager;
 import lt.bongibau.smapi.adapter.string.BooleanAdapter;
 import lt.bongibau.smapi.adapter.string.IntegerAdapter;
 import lt.bongibau.smapi.api.adapter.exception.AdapterSerializationException;
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class SMAPI {
     public static void main(String[] args) throws SMRegistryLoadingException, AdapterSerializationException {
-        AdapterRegistry.getInstance().load();
+        AdapterManager.getInstance().load();
 
         SMSchema<String> schema = new SMSchemaBuilder<String>()
-                .addField(AdapterRegistry.getInstance().get(IntegerAdapter.class))
+                .addField(AdapterManager.getInstance().get(IntegerAdapter.class))
                 .setIdentifier("test")
                 .addRule(new RequiredRule<>())
                 .addRule(new EqualsRule<>(19))
@@ -31,7 +31,7 @@ public class SMAPI {
                 }))
                 .addRule(new MaximumRule<>(19, false))
                 .build()
-                .addField("test2", AdapterRegistry.getInstance().get(BooleanAdapter.class))
+                .addField("test2", AdapterManager.getInstance().get(BooleanAdapter.class))
                 .addRule(new RequiredRule<>())
                 .build()
                 .build();

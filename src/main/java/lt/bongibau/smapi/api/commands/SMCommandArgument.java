@@ -5,22 +5,22 @@ import org.jetbrains.annotations.Nullable;
 
 public class SMCommandArgument {
     @NotNull
-    private final String name;
+    private final String identifier;
 
     @Nullable
     private final String description;
 
-    public SMCommandArgument(@NotNull String name) {
-        this(name, null);
+    public SMCommandArgument(@NotNull String identifier) {
+        this(identifier, null);
     }
 
-    public SMCommandArgument(@NotNull String name, @Nullable String description) {
-        this.name = name;
+    public SMCommandArgument(@NotNull String identifier, @Nullable String description) {
+        this.identifier = identifier;
         this.description = description;
     }
 
-    public @NotNull String getName() {
-        return name;
+    public @NotNull String getIdentifier() {
+        return identifier;
     }
 
     public @Nullable String getDescription() {

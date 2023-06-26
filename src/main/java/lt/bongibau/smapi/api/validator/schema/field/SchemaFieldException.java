@@ -15,7 +15,7 @@ public class SchemaFieldException extends InitiatedException implements Identifi
     }
 
     @Override
-    public String identifier() {
+    public @NotNull String identifier() {
         String initiatorIdentifier = this.getInitiator().identifier();
 
         if (initiatorIdentifier == null) {

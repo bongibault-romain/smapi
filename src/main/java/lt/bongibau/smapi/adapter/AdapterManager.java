@@ -2,16 +2,16 @@ package lt.bongibau.smapi.adapter;
 
 import lt.bongibau.smapi.adapter.string.*;
 import lt.bongibau.smapi.api.adapter.SMAdapter;
-import lt.bongibau.smapi.registries.InstanceSMRegistry;
+import lt.bongibau.smapi.registries.SMInstanceManager;
 import lt.bongibau.smapi.registries.exceptions.SMRegistryLoadingException;
 import lt.bongibau.smapi.registries.exceptions.SMRegistryUnLoadingException;
 
 import java.util.Arrays;
 
-public class AdapterRegistry extends InstanceSMRegistry<SMAdapter<?, ?>> {
-    private static final AdapterRegistry instance = new AdapterRegistry();
+public class AdapterManager extends SMInstanceManager<SMAdapter<?, ?>> {
+    private static final AdapterManager instance = new AdapterManager();
 
-    public static AdapterRegistry getInstance() {
+    public static AdapterManager getInstance() {
         return instance;
     }
 

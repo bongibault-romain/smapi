@@ -3,7 +3,7 @@ package lt.bongibau.smapi.registries;
 import lt.bongibau.smapi.registries.exceptions.SMRegistryLoadingException;
 import lt.bongibau.smapi.registries.exceptions.SMRegistryUnLoadingException;
 
-public abstract class SMRegistry {
+public abstract class SMManager {
 
     private boolean loaded = false;
 

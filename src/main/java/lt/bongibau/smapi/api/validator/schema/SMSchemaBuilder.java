@@ -1,6 +1,7 @@
 package lt.bongibau.smapi.api.validator.schema;
 
 import lt.bongibau.smapi.api.adapter.SMAdapter;
+import lt.bongibau.smapi.api.validator.rule.SMRule;
 import lt.bongibau.smapi.api.validator.schema.field.SMSchemaField;
 import lt.bongibau.smapi.api.validator.schema.field.SMSchemaFieldBuilder;
 
@@ -11,6 +12,8 @@ public class SMSchemaBuilder<T> {
 
     protected final List<SMSchemaField<T, ?>> fields = new ArrayList<>();
 
+    protected final List<SMRule<SMSchemaContext<T>>> rules = new ArrayList<>();
+
     public <F> SMSchemaFieldBuilder<T, F> addField(SMAdapter<T, F> adapter) {
         return new SMSchemaFieldBuilder<>(this, adapter);
     }
@@ -19,8 +22,14 @@ public class SMSchemaBuilder<T> {
         return this.addField(adapter).setIdentifier(name);
     }
 
+    public SMSchemaBuilder<T> addRule(SMRule<SMSchemaContext<T>> rule) {
+        this.rules.add(rule);
+
+        return this;
+    }
+
     public SMSchema<T> build() {
-        return new SMSchema<>(this.fields);
+        return new SMSchema<>(this.fields, this.rules);
     }
 
     public <F> SMSchemaBuilder<T> addField(SMSchemaField<T, F> field) {
