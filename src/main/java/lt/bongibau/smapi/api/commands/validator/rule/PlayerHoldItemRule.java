@@ -9,13 +9,22 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlayerHoldItemRule implements SMRule<CommandContext> {
 
+    @Nullable
     private final ItemStack itemStack;
 
     private final boolean negation;
 
-    public PlayerHoldItemRule(ItemStack itemStack, boolean negation) {
+    public PlayerHoldItemRule(@Nullable ItemStack itemStack, boolean negation) {
         this.itemStack = itemStack;
         this.negation = negation;
+    }
+
+    public PlayerHoldItemRule(@Nullable ItemStack itemStack) {
+        this(itemStack, false);
+    }
+
+    public PlayerHoldItemRule() {
+        this(null, false);
     }
 
     @Override
@@ -30,9 +39,27 @@ public class PlayerHoldItemRule implements SMRule<CommandContext> {
 
         ItemStack itemInHand = player.getItemInHand();
 
-        if (itemInHand == null || !itemInHand.isSimilar(itemStack)) {
+        if (itemInHand == null) {
+            if (itemStack == null) {
+                if (negation) return;
+
+                throw new RuleValidationException(this);
+            }
+
+            if (negation) {
+                throw new RuleValidationException(this);
+            }
+
+            return;
+        }
+
+        if (itemStack == null) {
             if (negation) return;
 
+            throw new RuleValidationException(this);
+        }
+
+        if (itemInHand.isSimilar(itemStack) == negation) {
             throw new RuleValidationException(this);
         }
     }
