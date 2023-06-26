@@ -47,14 +47,16 @@ public class PlayerHoldItemRule implements SMRule<CommandContext> {
             }
 
             if (negation) {
-                throw new RuleValidationException(this);
+                return;
             }
 
-            return;
+            throw new RuleValidationException(this);
         }
 
         if (itemStack == null) {
-            if (negation) return;
+            if (negation) {
+                return;
+            }
 
             throw new RuleValidationException(this);
         }
@@ -66,6 +68,6 @@ public class PlayerHoldItemRule implements SMRule<CommandContext> {
 
     @Override
     public String identifier() {
-        return null;
+        return "player-hold-item";
     }
 }
