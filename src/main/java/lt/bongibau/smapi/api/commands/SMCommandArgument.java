@@ -10,17 +10,25 @@ public class SMCommandArgument {
     @Nullable
     private final String description;
 
-    public SMCommandArgument(@NotNull String identifier) {
-        this(identifier, null);
+    @Nullable
+    private final String displayName;
+
+    public SMCommandArgument(@NotNull String identifier, @Nullable String displayName) {
+        this(identifier, displayName, null);
     }
 
-    public SMCommandArgument(@NotNull String identifier, @Nullable String description) {
+    public SMCommandArgument(@NotNull String identifier, @Nullable String displayName, @Nullable String description) {
         this.identifier = identifier;
         this.description = description;
+        this.displayName = displayName;
     }
 
     public @NotNull String getIdentifier() {
         return identifier;
+    }
+
+    public String getDisplayName() {
+        return displayName == null ? identifier : displayName;
     }
 
     public @Nullable String getDescription() {

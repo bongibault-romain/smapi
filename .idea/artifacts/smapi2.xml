@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="smapi2">
-    <output-path>$PROJECT_DIR$/../../Minecraft Servers/Islands Generator Test Server/plugins</output-path>
-    <root id="archive" name="smapi2.jar">
-      <element id="module-output" name="smapi" />
-      <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
-    </root>
-  </artifact>
-</component>

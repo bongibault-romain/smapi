@@ -51,8 +51,7 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
             SMCommand subCommand = this.subCommands.stream().filter(c -> c.getIdentifier().equalsIgnoreCase(strings[0])).findFirst().orElse(null);
 
             if (subCommand == null) {
-                // TODO: SEND USAGE
-                commandSender.sendMessage("Subcommand not found (todo: send usage)");
+                commandSender.sendMessage(this.getUsage());
                 return true;
             }
 
@@ -98,7 +97,15 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
         this.subCommands.add(command);
     }
 
-    public final <T> void addArgument(String identifier, @Nullable String description, SMAdapter<String, T> adapter, List<SMRule<T>> rules) {
+    public final <T> void addArgument(String identifier, SMAdapter<String, T> adapter, List<SMRule<T>> rules) {
+        this.addArgument(identifier, null, null, adapter, rules);
+    }
+
+    public final <T> void addArgument(String identifier, @Nullable String displayName, SMAdapter<String, T> adapter, List<SMRule<T>> rules) {
+        this.addArgument(identifier, displayName, null, adapter, rules);
+    }
+
+    public final <T> void addArgument(String identifier, @Nullable String displayName, @Nullable String description, SMAdapter<String, T> adapter, List<SMRule<T>> rules) {
         if (this.hasSubCommands()) {
             throw new IllegalCallerException("Cannot add argument to command with subcommands");
         }
@@ -107,11 +114,11 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
 
         if (isRequired) {
             this.requiredArguments.add(
-                    new SMCommandArgument(identifier, description)
+                    new SMCommandArgument(identifier, displayName, description)
             );
         } else {
             this.optionalArguments.add(
-                    new SMCommandArgument(identifier, description)
+                    new SMCommandArgument(identifier, displayName, description)
             );
         }
 
@@ -130,7 +137,7 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
     @NotNull
     public abstract String getIdentifier();
 
-    public String getGlobalIdentifier() {
+    public final String getGlobalIdentifier() {
         SMCommand parent = this.getParent();
 
         if (parent == null) {
@@ -167,8 +174,13 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
         return parent;
     }
 
-    private void setParent(SMCommand parent) {
+    private final void setParent(@Nullable SMCommand parent) {
         this.parent = parent;
+    }
+
+    @NotNull
+    public final List<SMCommandArgument> getOptionalArguments() {
+        return Collections.unmodifiableList(this.optionalArguments);
     }
 
     @NotNull
@@ -176,9 +188,7 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
         return Collections.unmodifiableList(this.requiredArguments);
     }
 
-    public List<SMCommandArgument> getOptionalArguments() {
-        return Collections.unmodifiableList(this.optionalArguments);
-    }
+    public abstract String getUsage();
 
     @NotNull
     public final List<SMCommand> getSubCommands() {
@@ -191,10 +201,6 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
 
     public String getMessage(String path) {
         return path;
-    }
-
-    public String getUsage() {
-        return "tg";
     }
 
     public abstract void execute(@NotNull CommandContext context);
