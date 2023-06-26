@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 public class AdapterSerializationException extends AdapterException {
     @Override
     @NotNull
-    public String identifier() {
+    public String getIdentifier() {
         return "serialisation";
     }
 }

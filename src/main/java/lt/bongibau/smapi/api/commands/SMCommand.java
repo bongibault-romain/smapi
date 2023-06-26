@@ -1,8 +1,18 @@
 package lt.bongibau.smapi.api.commands;
 
+import lt.bongibau.smapi.api.adapter.SMAdapter;
+import lt.bongibau.smapi.api.commands.validator.rule.IntegrityRule;
+import lt.bongibau.smapi.api.commands.validator.rule.PermittedRule;
+import lt.bongibau.smapi.api.commands.validator.rule.PlayerOnlyRule;
+import lt.bongibau.smapi.api.validator.rule.SMRule;
+import lt.bongibau.smapi.api.validator.schema.SMSchemaBuilder;
+import lt.bongibau.smapi.api.validator.schema.SchemaValidationException;
+import lt.bongibau.smapi.api.validator.schema.field.SchemaFieldException;
+import lt.bongibau.smapi.validator.rule.RequiredRule;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.permissions.Permission;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,23 +21,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class SMCommand implements CommandExecutor {
+public abstract class SMCommand implements CommandExecutor, TabCompleter {
 
     @NotNull
     private final List<SMCommand> subCommands = new ArrayList<>();
 
     @NotNull
-    private final List<SMCommandArgument> arguments = new ArrayList<>();
+    private final List<SMCommandArgument> requiredArguments = new ArrayList<>();
 
+    @NotNull
+    private final List<SMCommandArgument> optionalArguments = new ArrayList<>();
+    private final SMSchemaBuilder<String, CommandContext> schemaBuilder = new SMSchemaBuilder<>();
     @Nullable
-    private final SMCommand parent;
-
-    public SMCommand(@Nullable SMCommand parent) {
-        this.parent = parent;
-    }
+    private SMCommand parent;
 
     public SMCommand() {
-        this(null);
+        this.schemaBuilder
+                .addRule(new PermittedRule(this.getPermission()))
+                .addRule(new IntegrityRule());
+
+        if (this.isPlayerOnly()) {
+            this.schemaBuilder.addRule(new PlayerOnlyRule());
+        }
     }
 
     @Override
@@ -48,24 +63,82 @@ public abstract class SMCommand implements CommandExecutor {
             return true;
         }
 
-        CommandContext context = new CommandContext(this, commandSender, strings);
-        this.execute(context);
+        CommandContext context = new CommandContext(this, commandSender, strings, this.schemaBuilder.build());
 
+        try {
+            context.validate();
+        } catch (SchemaValidationException e) {
+            List<SchemaFieldException> errors = e.getErrors();
+
+            if (errors.size() > 0) {
+                commandSender.sendMessage(this.getMessage(errors.get(0).getIdentifier()));
+                return true;
+            }
+        }
+
+        this.execute(context);
         return true;
     }
 
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        return Collections.emptyList();
+    }
+
     public final void addSubCommand(@NotNull SMCommand command) {
+        if (this.getRequiredArguments().size() > 0 || this.getOptionalArguments().size() > 0) {
+            throw new IllegalCallerException("Cannot add subcommand to command with arguments");
+        }
+
         if (command == this)
             throw new IllegalArgumentException("Cannot add self as subcommand");
+
+        command.setParent(this);
 
         this.subCommands.add(command);
     }
 
-    public final void addArgument(String identifier, String description, boolean required) {
+    public final <T> void addArgument(String identifier, @Nullable String description, SMAdapter<String, T> adapter, List<SMRule<T>> rules) {
+        if (this.hasSubCommands()) {
+            throw new IllegalCallerException("Cannot add argument to command with subcommands");
+        }
+
+        boolean isRequired = rules.stream().anyMatch(r -> r instanceof RequiredRule<T>);
+
+        if (isRequired) {
+            this.requiredArguments.add(
+                    new SMCommandArgument(identifier, description)
+            );
+        } else {
+            this.optionalArguments.add(
+                    new SMCommandArgument(identifier, description)
+            );
+        }
+
+
+        this.schemaBuilder
+                .addField(identifier, adapter, rules)
+                .build();
+    }
+
+    public void onLoad() {
+    }
+
+    public void onUnload() {
     }
 
     @NotNull
     public abstract String getIdentifier();
+
+    public String getGlobalIdentifier() {
+        SMCommand parent = this.getParent();
+
+        if (parent == null) {
+            return this.getIdentifier();
+        }
+
+        return parent.getGlobalIdentifier() + "." + this.getIdentifier();
+    }
 
     /**
      * @return null if no permission is required
@@ -94,9 +167,17 @@ public abstract class SMCommand implements CommandExecutor {
         return parent;
     }
 
+    private void setParent(SMCommand parent) {
+        this.parent = parent;
+    }
+
     @NotNull
-    public final List<SMCommandArgument> getArguments() {
-        return Collections.unmodifiableList(this.arguments);
+    public final List<SMCommandArgument> getRequiredArguments() {
+        return Collections.unmodifiableList(this.requiredArguments);
+    }
+
+    public List<SMCommandArgument> getOptionalArguments() {
+        return Collections.unmodifiableList(this.optionalArguments);
     }
 
     @NotNull
@@ -106,6 +187,14 @@ public abstract class SMCommand implements CommandExecutor {
 
     public final boolean hasSubCommands() {
         return !this.subCommands.isEmpty();
+    }
+
+    public String getMessage(String path) {
+        return path;
+    }
+
+    public String getUsage() {
+        return "tg";
     }
 
     public abstract void execute(@NotNull CommandContext context);

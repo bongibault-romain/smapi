@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class SMSchema<T> {
-    private final @NotNull List<SMSchemaField<T, ?>> fields;
+public class SMSchema<Entry, Context extends SMSchemaContext<Entry>> {
+    private final @NotNull List<SMSchemaField<Entry, ?>> fields;
 
-    private final @NotNull List<SMRule<SMSchemaContext<T>>> rules;
+    private final List<SMRule<Context>> rules;
 
-    public SMSchema(@NotNull List<SMSchemaField<T, ?>> fields, @NotNull List<SMRule<SMSchemaContext<T>>> contextRules) {
+    public SMSchema(@NotNull List<SMSchemaField<Entry, ?>> fields, List<SMRule<Context>> contextRules) {
         this.fields = fields;
         this.rules = contextRules;
 
@@ -23,19 +23,19 @@ public class SMSchema<T> {
          * Check if all field fieldIdentifiers are unique
          */
         List<String> fieldIdentifiers = new ArrayList<>();
-        for (SMSchemaField<T, ?> field : this.fields) {
-            if (fieldIdentifiers.contains(field.identifier())) {
-                throw new IllegalArgumentException("Field identifier must be unique, but found duplicate: " + field.identifier() + ". All the fields must have a different identifier.");
+        for (SMSchemaField<Entry, ?> field : this.fields) {
+            if (fieldIdentifiers.contains(field.getIdentifier())) {
+                throw new IllegalArgumentException("Field identifier must be unique, but found duplicate: " + field.getIdentifier() + ". All the fields must have a different identifier.");
             }
 
-            fieldIdentifiers.add(field.identifier());
+            fieldIdentifiers.add(field.getIdentifier());
         }
 
         /*
          * Check if all rule ruleIdentifiers are unique
          */
         List<String> ruleIdentifiers = new ArrayList<>();
-        for (SMRule<SMSchemaContext<T>> rule : this.rules) {
+        for (SMRule<Context> rule : this.rules) {
             if (ruleIdentifiers.contains(rule.identifier())) {
                 throw new IllegalArgumentException("Rule identifier must be unique, but found duplicate: " + rule.identifier() + ".");
             }
@@ -44,31 +44,30 @@ public class SMSchema<T> {
         }
     }
 
-    public SMSchemaResult validate(SMSchemaContext<T> context) throws SchemaValidationException {
-        return this.validate(context.getData());
-    }
-
-    public SMSchemaResult validate(List<SMSchemaData<T>> data) throws SchemaValidationException {
+    public SMSchemaResult validate(Context context) throws SchemaValidationException {
         List<SchemaFieldException> errors = new ArrayList<>();
         List<SMSchemaData<?>> result = new ArrayList<>();
         int errorAmount = 0;
 
-        for (SMRule<SMSchemaContext<T>> rule : this.rules()) {
+        for (SMRule<Context> rule : this.rules()) {
             try {
-                rule.validate(new SMSchemaContext<T>(data));
+                rule.validate(context);
             } catch (RuleValidationException e) {
-                throw new RuntimeException(e);
+                errors.add(new SchemaFieldException(null, rule.identifier(), context.getIdentifierPrefix()));
+                errorAmount++;
             }
         }
 
-        for (SMSchemaField<T, ?> field : this.fields()) {
-            SMSchemaData<T> dataEntry = data.stream()
-                    .filter(d -> Objects.equals(d.identifier(), field.identifier()))
+        List<SMSchemaData<Entry>> data = context.getData();
+
+        for (SMSchemaField<Entry, ?> field : this.fields()) {
+            SMSchemaData<Entry> dataEntry = data.stream()
+                    .filter(d -> Objects.equals(d.getIdentifier(), field.getIdentifier()))
                     .findFirst()
-                    .orElse(new SMSchemaData<>(field.identifier(), null));
+                    .orElse(new SMSchemaData<>(field.getIdentifier(), null));
 
             try {
-                result.add(new SMSchemaData<>(field.identifier(), field.validate(dataEntry)));
+                result.add(new SMSchemaData<>(field.getIdentifier(), field.validate(dataEntry, context)));
             } catch (SchemaValidationException e) {
                 errors.addAll(e.getErrors());
                 errorAmount += e.getErrors().size();
@@ -76,17 +75,18 @@ public class SMSchema<T> {
         }
 
         if (errorAmount != 0) {
+
             throw new SchemaValidationException(errors);
         }
 
         return new SMSchemaResult(result);
     }
 
-    public void addRule(SMRule<SMSchemaContext<T>> rule) {
+    public void addRule(SMRule<Context> rule) {
         /*
          * Check if rule identifier is unique
          */
-        for (SMRule<SMSchemaContext<T>> r : this.rules) {
+        for (SMRule<Context> r : this.rules) {
             if (Objects.equals(r.identifier(), rule.identifier())) {
                 throw new IllegalArgumentException("Rule identifier must be unique, but found duplicate: " + rule.identifier() + ".");
             }
@@ -95,11 +95,11 @@ public class SMSchema<T> {
         this.rules.add(rule);
     }
 
-    public @NotNull List<SMSchemaField<T, ?>> fields() {
+    public @NotNull List<SMSchemaField<Entry, ?>> fields() {
         return fields;
     }
 
-    public List<SMRule<SMSchemaContext<T>>> rules() {
+    public List<SMRule<Context>> rules() {
         return rules;
     }
 }

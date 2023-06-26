@@ -1,6 +1,9 @@
 package lt.bongibau.smapi.api.validator.rule;
 
-public class RuleValidationException extends Exception {
+import lt.bongibau.smapi.api.exception.IdentifiedException;
+import org.jetbrains.annotations.Nullable;
+
+public class RuleValidationException extends Exception implements IdentifiedException {
     private final SMRule<?> rule;
 
     public RuleValidationException(SMRule<?> rule) {
@@ -9,5 +12,10 @@ public class RuleValidationException extends Exception {
 
     public SMRule<?> getRule() {
         return rule;
+    }
+
+    @Override
+    public @Nullable String getIdentifier() {
+        return rule.identifier();
     }
 }

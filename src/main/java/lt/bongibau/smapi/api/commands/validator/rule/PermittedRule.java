@@ -23,13 +23,13 @@ public class PermittedRule implements SMRule<CommandContext> {
     }
 
     @Override
-    public void validate(@Nullable CommandContext value) throws RuleValidationException {
-        if (value == null) return;
-        
+    public void validate(@Nullable CommandContext context) throws RuleValidationException {
+        if (context == null) return;
+
         for (Permission permission : permissions) {
             if (permission == null) continue;
 
-            if (!value.getSender().hasPermission(permission)) {
+            if (!context.getSender().hasPermission(permission)) {
                 throw new RuleValidationException(this);
             }
         }
@@ -37,6 +37,6 @@ public class PermittedRule implements SMRule<CommandContext> {
 
     @Override
     public String identifier() {
-        return "player-only";
+        return "permitted";
     }
 }

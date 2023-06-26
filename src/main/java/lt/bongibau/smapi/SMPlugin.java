@@ -1,14 +1,15 @@
 package lt.bongibau.smapi;
 
 import lt.bongibau.smapi.adapter.AdapterManager;
+import lt.bongibau.smapi.api.managers.exceptions.SMRegistryLoadingException;
+import lt.bongibau.smapi.api.managers.exceptions.SMRegistryUnLoadingException;
 import lt.bongibau.smapi.commands.CommandManager;
-import lt.bongibau.smapi.registries.exceptions.SMRegistryLoadingException;
-import lt.bongibau.smapi.registries.exceptions.SMRegistryUnLoadingException;
+import lt.bongibau.smapi.managers.SMManagerRegistry;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public abstract class SMPlugin extends JavaPlugin {
+import java.util.Arrays;
 
-    private static SMPlugin instance = null;
+public abstract class SMPlugin extends JavaPlugin {
 
     public abstract void beforeEnable();
 
@@ -20,15 +21,18 @@ public abstract class SMPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        instance = this;
-
         this.beforeEnable();
 
+        SMManagerRegistry.getInstance().register(Arrays.asList(
+                CommandManager.getInstance(),
+                AdapterManager.getInstance()
+        ));
+
         try {
-            AdapterManager.getInstance().load();
-            CommandManager.getInstance().load();
+            SMManagerRegistry.getInstance().load(this);
         } catch (SMRegistryLoadingException e) {
             this.getLogger().severe(e.getMessage());
+            this.getServer().getPluginManager().disablePlugin(this);
         }
 
         this.afterEnable();
@@ -36,17 +40,15 @@ public abstract class SMPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        this.beforeDisable();
+
         try {
-            CommandManager.getInstance().unload();
-            AdapterManager.getInstance().unload();
+            SMManagerRegistry.getInstance().unload(this);
         } catch (SMRegistryUnLoadingException e) {
             this.getLogger().severe(e.getMessage());
+            return;
         }
 
-        instance = null;
-    }
-
-    public static SMPlugin getInstance() {
-        return instance;
+        this.afterDisable();
     }
 }

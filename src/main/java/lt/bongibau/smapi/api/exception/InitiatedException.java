@@ -12,7 +12,7 @@ public class InitiatedException extends Throwable {
         return initiator;
     }
 
-    public String identifier() {
-        return this.getInitiator().identifier();
+    public String getIdentifier() {
+        return this.getInitiator().getIdentifier();
     }
 }

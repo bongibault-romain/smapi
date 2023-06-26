@@ -1,7 +1,7 @@
 package lt.bongibau.smapi.api.exception;
 
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface IdentifiedException {
-    @NotNull String identifier();
+    @Nullable String getIdentifier();
 }

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 public class AdapterDeserializationException extends AdapterException {
     @Override
     @NotNull
-    public String identifier() {
+    public String getIdentifier() {
         return "deserialization";
     }
 }

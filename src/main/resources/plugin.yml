@@ -1,7 +1,9 @@
-name: SMAPI
+name: SMAPI2
 version: 1.0.0
 authors:
   - Bongibault Romain
-main: lt.bongibau.smapi.SMAPI
+main: lt.bongibau.smapi.TestPlugin
 api-version: 1.13
 load: POSTWORLD
+commands:
+  test2: { }

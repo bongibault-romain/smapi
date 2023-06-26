@@ -8,10 +8,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlayerOnlyRule implements SMRule<CommandContext> {
     @Override
-    public void validate(@Nullable CommandContext value) throws RuleValidationException {
-        if (value == null) return;
+    public void validate(@Nullable CommandContext context) throws RuleValidationException {
+        if (context == null) return;
 
-        if (value.getSender() == null || !(value.getSender() instanceof Player)) {
+        if (context.getSender() == null || !(context.getSender() instanceof Player)) {
             throw new RuleValidationException(this);
         }
     }

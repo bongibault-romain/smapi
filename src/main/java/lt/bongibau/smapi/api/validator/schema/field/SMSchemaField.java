@@ -5,6 +5,7 @@ import lt.bongibau.smapi.api.adapter.exception.AdapterSerializationException;
 import lt.bongibau.smapi.api.exception.IdentifiedException;
 import lt.bongibau.smapi.api.validator.rule.RuleValidationException;
 import lt.bongibau.smapi.api.validator.rule.SMRule;
+import lt.bongibau.smapi.api.validator.schema.SMSchemaContext;
 import lt.bongibau.smapi.api.validator.schema.SMSchemaData;
 import lt.bongibau.smapi.api.validator.schema.SchemaValidationException;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +15,9 @@ import java.util.List;
 
 public class SMSchemaField<T, K> implements IdentifiedException {
     private final @NotNull String identifier;
+
     private final SMAdapter<T, K> adapter;
+
     private final List<SMRule<K>> rules;
 
     public SMSchemaField(@NotNull String identifier, SMAdapter<T, K> adapter,
@@ -36,22 +39,22 @@ public class SMSchemaField<T, K> implements IdentifiedException {
         }
     }
 
-    public K validate(@NotNull SMSchemaData<T> data) throws SchemaValidationException {
+    public K validate(@NotNull SMSchemaData<T> data, SMSchemaContext<T> context) throws SchemaValidationException {
         List<SchemaFieldException> errors = new ArrayList<>(List.of());
 
         K value;
         try {
-            value = this.adapter.serialize(data.value());
+            value = this.adapter.serialize(data.getValue());
 
             for (SMRule<K> rule : this.rules) {
                 try {
                     rule.validate(value);
                 } catch (RuleValidationException e) {
-                    errors.add(new SchemaFieldException(this, rule.identifier()));
+                    errors.add(new SchemaFieldException(this, rule.identifier(), context.getIdentifierPrefix()));
                 }
             }
         } catch (AdapterSerializationException e) {
-            throw new SchemaValidationException(List.of(new SchemaFieldException(this, e.identifier())));
+            throw new SchemaValidationException(List.of(new SchemaFieldException(this, e.getIdentifier(), context.getIdentifierPrefix())));
         }
 
         if (errors.size() > 0) {
@@ -62,7 +65,7 @@ public class SMSchemaField<T, K> implements IdentifiedException {
     }
 
     @Override
-    public @NotNull String identifier() {
+    public @NotNull String getIdentifier() {
         return identifier;
     }
 

@@ -1,6 +1,7 @@
 package lt.bongibau.smapi.api.validator.schema;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +17,7 @@ public class SMSchemaContext<T> {
     }
 
     public @NotNull SMSchemaData<T> get(String identifier) {
-        SMSchemaData<T> stringSMSchemaData = this.data.stream().filter(d -> Objects.equals(d.identifier(), identifier)).findFirst().orElse(null);
+        SMSchemaData<T> stringSMSchemaData = this.data.stream().filter(d -> Objects.equals(d.getIdentifier(), identifier)).findFirst().orElse(null);
 
         if (stringSMSchemaData == null) {
             throw new IllegalArgumentException("No data found for identifier: " + identifier);
@@ -28,5 +29,11 @@ public class SMSchemaContext<T> {
     @NotNull
     public List<SMSchemaData<T>> getData() {
         return Collections.unmodifiableList(this.data);
+    }
+
+
+    @Nullable
+    public String getIdentifierPrefix() {
+        return null;
     }
 }

@@ -17,12 +17,12 @@ public class SMSchemaData<T> implements IdentifiedException {
     }
 
     @Nullable
-    public T value() {
+    public T getValue() {
         return this.value;
     }
 
     @Override
-    public @NotNull String identifier() {
+    public @NotNull String getIdentifier() {
         return this.identifier;
     }
 }

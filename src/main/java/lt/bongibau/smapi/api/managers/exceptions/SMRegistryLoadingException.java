@@ -1,4 +1,4 @@
-package lt.bongibau.smapi.registries.exceptions;
+package lt.bongibau.smapi.api.managers.exceptions;
 
 public final class SMRegistryLoadingException extends Exception {
     public SMRegistryLoadingException() {

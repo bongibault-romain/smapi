@@ -1,15 +1,16 @@
-package lt.bongibau.smapi.registries;
+package lt.bongibau.smapi.api.managers;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-public abstract class SMInstanceManager<T> extends SMManager {
+public abstract class SMConcurrentInstanceManager<T> extends SMManager {
 
-    private final List<T> data = new ArrayList<>();
+    private final ConcurrentLinkedQueue<T> data = new ConcurrentLinkedQueue<>();
 
     public void register(@NotNull T registry) {
         if (!this.data.contains(registry))
@@ -35,7 +36,11 @@ public abstract class SMInstanceManager<T> extends SMManager {
         return null;
     }
 
-    public List<T> getData() {
-        return Collections.unmodifiableList(this.data);
+    public Collection<T> getData() {
+        return Collections.unmodifiableCollection(this.data);
+    }
+
+    protected ConcurrentLinkedQueue<T> getModifiableData() {
+        return this.data;
     }
 }

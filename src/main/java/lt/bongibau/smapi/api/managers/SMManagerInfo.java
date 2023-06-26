@@ -1,4 +1,4 @@
-package lt.bongibau.smapi.registries;
+package lt.bongibau.smapi.api.managers;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

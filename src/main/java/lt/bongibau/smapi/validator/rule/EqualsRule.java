@@ -19,7 +19,7 @@ public class EqualsRule<T> implements SMRule<T> {
         }
 
         /*
-          If one of the values is null, but not both, then the rule is not satisfied.
+         * If one of the values is null, but not both, then the rule is not satisfied.
          */
         if (value == null || this.equalsTo == null) {
             throw new RuleValidationException(this);

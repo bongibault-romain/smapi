@@ -8,31 +8,35 @@ import lt.bongibau.smapi.api.validator.schema.field.SMSchemaFieldBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SMSchemaBuilder<T> {
+public class SMSchemaBuilder<Entry, Context extends SMSchemaContext<Entry>> {
 
-    protected final List<SMSchemaField<T, ?>> fields = new ArrayList<>();
+    protected final List<SMSchemaField<Entry, ?>> fields = new ArrayList<>();
 
-    protected final List<SMRule<SMSchemaContext<T>>> rules = new ArrayList<>();
+    protected final List<SMRule<Context>> rules = new ArrayList<>();
 
-    public <F> SMSchemaFieldBuilder<T, F> addField(SMAdapter<T, F> adapter) {
+    public <F> SMSchemaFieldBuilder<Entry, F, Context> addField(SMAdapter<Entry, F> adapter) {
         return new SMSchemaFieldBuilder<>(this, adapter);
     }
 
-    public <F> SMSchemaFieldBuilder<T, F> addField(String name, SMAdapter<T, F> adapter) {
+    public <F> SMSchemaFieldBuilder<Entry, F, Context> addField(String name, SMAdapter<Entry, F> adapter, List<SMRule<F>> rules) {
+        return this.addField(adapter).setIdentifier(name).addRules(rules);
+    }
+
+    public <F> SMSchemaFieldBuilder<Entry, F, Context> addField(String name, SMAdapter<Entry, F> adapter) {
         return this.addField(adapter).setIdentifier(name);
     }
 
-    public SMSchemaBuilder<T> addRule(SMRule<SMSchemaContext<T>> rule) {
+    public SMSchemaBuilder<Entry, Context> addRule(SMRule<Context> rule) {
         this.rules.add(rule);
 
         return this;
     }
 
-    public SMSchema<T> build() {
+    public SMSchema<Entry, Context> build() {
         return new SMSchema<>(this.fields, this.rules);
     }
 
-    public <F> SMSchemaBuilder<T> addField(SMSchemaField<T, F> field) {
+    public <F> SMSchemaBuilder<Entry, Context> addField(SMSchemaField<Entry, F> field) {
         this.fields.add(field);
 
         return this;
