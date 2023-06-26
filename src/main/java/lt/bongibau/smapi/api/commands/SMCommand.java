@@ -62,6 +62,7 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
+
         CommandContext context = new CommandContext(this, commandSender, strings, this.schemaBuilder.build());
 
         try {
@@ -93,6 +94,7 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
             throw new IllegalArgumentException("Cannot add self as subcommand");
 
         command.setParent(this);
+        command.onLoad();
 
         this.subCommands.add(command);
     }
@@ -188,7 +190,9 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
         return Collections.unmodifiableList(this.requiredArguments);
     }
 
-    public abstract String getUsage();
+    public String getUsage() {
+        return "";
+    }
 
     @NotNull
     public final List<SMCommand> getSubCommands() {
