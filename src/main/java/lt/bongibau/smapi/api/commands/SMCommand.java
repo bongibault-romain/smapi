@@ -9,10 +9,13 @@ import lt.bongibau.smapi.api.validator.schema.SMSchemaBuilder;
 import lt.bongibau.smapi.api.validator.schema.SchemaValidationException;
 import lt.bongibau.smapi.api.validator.schema.field.SchemaFieldException;
 import lt.bongibau.smapi.validator.rule.RequiredRule;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,7 +54,13 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
             SMCommand subCommand = this.subCommands.stream().filter(c -> c.getIdentifier().equalsIgnoreCase(strings[0])).findFirst().orElse(null);
 
             if (subCommand == null) {
-                commandSender.sendMessage(this.getUsage());
+                for (TextComponent component : this.getUsage()) {
+                    if (this.isPlayerOnly()) {
+                        ((Player) commandSender).spigot().sendMessage(component);
+                    } else {
+                        commandSender.sendMessage(component.toPlainText());
+                    }
+                }
                 return true;
             }
 
@@ -190,8 +199,51 @@ public abstract class SMCommand implements CommandExecutor, TabCompleter {
         return Collections.unmodifiableList(this.requiredArguments);
     }
 
-    public String getUsage() {
-        return "";
+    public List<TextComponent> getUsage() {
+        return this.getCommandUsage();
+    }
+
+    public TextComponent getParentTextComponentUsage() {
+        if (this.parent == null) {
+            return new TextComponent("§e/" + this.getIdentifier());
+        }
+
+        TextComponent component = this.parent.getParentTextComponentUsage();
+        component.addExtra(" ");
+        component.addExtra(new TextComponent(this.getIdentifier()));
+
+        return component;
+    }
+
+    public List<TextComponent> getCommandUsage() {
+        List<TextComponent> components = new ArrayList<>();
+        TextComponent parentComponent = this.getParentTextComponentUsage();
+
+        if (this.hasSubCommands()) {
+
+        }
+
+        return components;
+    }
+
+    public TextComponent getRequiredArgumentUsage(SMCommandArgument argument) {
+        TextComponent component = new TextComponent("§e<" + argument.getDisplayName() + ">");
+
+        component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponent[]{
+                new TextComponent("§7" + argument.getDescription())
+        }));
+
+        return component;
+    }
+
+    public TextComponent getOptionalArgumentUsage(SMCommandArgument argument) {
+        TextComponent component = new TextComponent("§e[" + argument.getDisplayName() + "]");
+
+        component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponent[]{
+                new TextComponent("§7" + argument.getDescription())
+        }));
+
+        return component;
     }
 
     public void addRule(SMRule<CommandContext> rule) {
